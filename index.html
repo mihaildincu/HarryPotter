@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a0b2e" />
+  <meta name="description" content="Toate vrăjile din Harry Potter — aplicație PWA offline, în română." />
+  <title>Vrăjile din Harry Potter</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="logo">⚡</div>
+      <div>
+        <h1>Vrăjile din Harry Potter</h1>
+        <p id="count">Se încarcă…</p>
+      </div>
+      <button id="installBtn" class="install-btn" hidden>Instalează</button>
+    </div>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Caută vrajă… ex: lumos, patronum, foc" autocomplete="off" />
+      <div class="filters">
+        <label><input type="checkbox" id="onlyFav" /> ⭐ Favorite</label>
+        <label><input type="checkbox" id="onlyUnforgivable" /> ☠️ De Neiertat</label>
+      </div>
+    </div>
+    <div id="offlineBadge" class="offline-badge" hidden>Offline — funcționează din cache</div>
+  </header>
+
+  <main>
+    <div id="grid" class="grid"></div>
+    <p id="empty" class="empty" hidden>Nicio vrajă găsită. Încearcă altă căutare.</p>
+  </main>
+
+  <footer>
+    <p>Date: PotterAPI (CC-BY-SA) + traduceri RO. PWA offline cu Service Worker.</p>
+  </footer>
+
+  <script src="js/spells.js"></script>
+  <script src="js/chars.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+  </script>
+</body>
+</html>
